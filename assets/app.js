@@ -15,7 +15,7 @@ $("button").on("click", function() {
 	}).done(function(response) {
 		for (var i = 0; i < 10; i++) {
 			var result = response.data[i].images.fixed_height.url;
-			$("#giphs").prepend("<img src=" + result + ">");
+			$("#giphs").prepend("<div><img src=" + result + ">" + "<br><br>" + "Rating: " + response.data[i].rating + "</div>");
 		}
 	})
 });
