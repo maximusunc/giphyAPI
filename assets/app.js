@@ -24,8 +24,8 @@ $("#addButton").on("click", function () {
 displayButtons();
 
 $("#buttons").on("click", "button", function() {
+	$("#giphs").empty();
 	queryURL += "&q=" + $(this).text();
-	console.log(queryURL)
 	$.ajax({
 		url: queryURL,
 		method: "GET",
@@ -34,21 +34,25 @@ $("#buttons").on("click", "button", function() {
 			still = response.data[i].images.fixed_height_still.url;
 			animated = response.data[i].images.fixed_height.url;
 			rating = response.data[i].rating;
-			var giph = "<img src=" + still + " data-still=" + still + " data-animated=" + animated + " data-state=still class=giph>" + "<br><br>" + "Rating: " + rating;
-			$("#giphs").prepend(giph);
+			if (rating == "g" || rating == "pg") {
+				var giph = "<div><img src=" + still + " data-still=" + still + " data-animated=" + animated + " data-state=still class=giph>" + "<br><br>" + "Rating: " + rating + "</div>";
+				$("#giphs").prepend(giph);
+			};
 		}
 		$(".giph").on("click", function() {
+			console.log("test");
 			var state = $(this).attr("data-state");
-			if (state === "still") {
+			if (state == "still") {
 				$(this).attr("src", $(this).attr("data-animated"));
 				$(this).attr("data-state", "animated");
-				console.log($(this).attr("src"));
 			} else {
 				$(this).attr("src", $(this).attr("data-still"));
 				$(this).attr("data-state", "still");
-				console.log($(this).attr("src"));
-			}
-		});
-	})
+		};
+	});
+	});
 });
+
+
+
 

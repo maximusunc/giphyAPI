@@ -3,3 +3,9 @@
 	padding: 10px;
 	text-align: center;
 }
+button {
+	margin: 5px;
+	background-color: #49979b;
+	color: white;
+	border-radius: 5px;
+}
